@@ -159,8 +159,7 @@ const Dashboard = () => {
 
   const totals = data?.tasks || {}; // Ensure totals is an object, defaulting to an empty object if data?.tasks is undefined
   const completedTasks = totals && totals["completed"] ? totals["completed"] : 0; // Check if totals and totals["completed"] are defined before accessing
-  console.log(data.users);
-const stats = [
+  const stats = [
   {
     _id: "1",
     label: "TOTAL TASK",
