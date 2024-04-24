@@ -152,22 +152,11 @@ const UserTable = ({ users }) => {
 
 const Dashboard = () => {
   const { data , isLoading } = useGetDashbordStatsQuery();
-useEffect(() => {
-  if (data && data.users) {
-    console.log(data.users); // Log data.users only if it exists
-  }
-}, [data]); // Make sure to include data in the dependency array to log it whenever it changes
-useEffect(() => {
-    const token = localStorage.getItem("token");
-    // Use the token for authentication, e.g., include it in the request headers
-  }, []);
+
   if (isLoading)
   return ( <div className='py-10'> <Loader /> </div>
   );
-  // Render the component content only if data and data.users exist
-if (!data || !data.users) {
-  return <div>No user data available.</div>;
-}
+
 
   const totals = data?.tasks || {}; // Ensure totals is an object, defaulting to an empty object if data?.tasks is undefined
   const completedTasks = totals && totals["completed"] ? totals["completed"] : 0; // Check if totals and totals["completed"] are defined before accessing
