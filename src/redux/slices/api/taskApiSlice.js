@@ -1,38 +1,23 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { apiSlice } from "../apiSlice";
 
 const TASKS_URL = "/task";
 
-const baseQuery = async (args, api, extraOptions) => {
-  const { method, headers, ...others } = args;
-  const response = await fetch(args.url, {
-    method,
-    headers: {
-      'Origin': 'https://karapain.github.io',
-      'Access-Control-Request-Headers': 'Content-Type, Authorization',
-      'Access-Control-Request-Method': 'GET',
-      // Add any other headers your backend expects here
-      ...headers,
-    },
-    credentials: 'include', // Include this if you need to send cookies or authentication headers
-    ...others,
-  });
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
-  }
-  return response.json();
-};
-
-export const taskApi = createApi({
-  reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: TASKS_URL }),
+export const taskApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getDashbordStats: builder.query({
-      query: () => `${TASKS_URL}/dashboard`,
+      query: () => ({
+        url: `${TASKS_URL}/dashboard`,
+        method: "GET",
+        credentials: "include",
+      }),
     }),
 
     getAllTask: builder.query({
-      query: ({ strQuery, isTrashed, search }) =>
-        `${TASKS_URL}?stage=${strQuery}&isTrashed=${isTrashed}&search={search}`,
+      query: ({ strQuery, isTrashed, search }) => ({
+        url: `${TASKS_URL}?stage=${strQuery}&isTrashed=${isTrashed}&search={search}`,
+        method: "GET",
+        credentials: "include",
+      }),
     }),
 
     createTask: builder.mutation({
@@ -40,6 +25,7 @@ export const taskApi = createApi({
         url: `${TASKS_URL}/create`,
         method: "POST",
         body: data,
+        credentials: "include",
       }),
     }),
 
@@ -48,14 +34,15 @@ export const taskApi = createApi({
         url: `${TASKS_URL}/duplicate/${id}`,
         method: "POST",
         body: {},
+        credentials: "include",
       }),
     }),
-    
-updateTask: builder.mutation({
+    updateTask: builder.mutation({
       query: (data) => ({
         url: `${TASKS_URL}/update/${data._id}`,
         method: "PUT",
         body: data,
+        credentials: "include",
       }),
     }),
 
@@ -65,6 +52,7 @@ updateTask: builder.mutation({
 
         method: "PUT",
 
+        credentials: "include",
       }),
     }),
     createSubTask: builder.mutation({
@@ -72,6 +60,7 @@ updateTask: builder.mutation({
         url: `${TASKS_URL}/create-subtask/${id}`,
         method: "PUT",
         body: data,
+        credentials: "include",
       }),
     }),
 
@@ -79,6 +68,7 @@ updateTask: builder.mutation({
       query: (id) => ({
         url: `${TASKS_URL}/${id}`,
         method: "GET",
+        credentials: "include",
       }),
     }),
 
@@ -87,12 +77,14 @@ updateTask: builder.mutation({
         url: `${TASKS_URL}/activity/${id}`,
         method: "POST",
         body: data,
+        credentials: "include",
       }),
     }),
     deleteRestoreTask: builder.mutation({
       query: ({ id, actionType }) => ({
         url: `${TASKS_URL}/delete-restore/${id}?actionType=${actionType}`,
         method: "DELETE",
+        credentials: "include",
       }),
     }),
   }),
@@ -110,4 +102,3 @@ export const {
   usePostTaskActivityMutation,
   useDeleteRestoreTaskMutation,
 } = taskApiSlice;
-
