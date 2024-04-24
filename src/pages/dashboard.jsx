@@ -153,8 +153,10 @@ const UserTable = ({ users }) => {
 const Dashboard = () => {
   const { data , isLoading } = useGetDashbordStatsQuery();
 useEffect(() => {
-    console.log(data.users); // Add this line to log the data.users object
-  }, [data]); // Make sure to include data in the dependency array to log it whenever it changes
+  if (data && data.users) {
+    console.log(data.users); // Log data.users only if it exists
+  }
+}, [data]); // Make sure to include data in the dependency array to log it whenever it changes
 useEffect(() => {
     const token = localStorage.getItem("token");
     // Use the token for authentication, e.g., include it in the request headers
