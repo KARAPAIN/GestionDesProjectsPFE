@@ -50,8 +50,51 @@ export const taskApi = createApi({
         body: {},
       }),
     }),
+    
+updateTask: builder.mutation({
+      query: (data) => ({
+        url: `${TASKS_URL}/update/${data._id}`,
+        method: "PUT",
+        body: data,
+      }),
+    }),
 
-    // Other endpoints go here
+    trashTast: builder.mutation({
+      query: ({ id }) => ({
+        url: `${TASKS_URL}/${id}`,
+
+        method: "PUT",
+
+      }),
+    }),
+    createSubTask: builder.mutation({
+      query: ({ data, id }) => ({
+        url: `${TASKS_URL}/create-subtask/${id}`,
+        method: "PUT",
+        body: data,
+      }),
+    }),
+
+    getSingleTask: builder.query({
+      query: (id) => ({
+        url: `${TASKS_URL}/${id}`,
+        method: "GET",
+      }),
+    }),
+
+    postTaskActivity: builder.mutation({
+      query: ({ data, id }) => ({
+        url: `${TASKS_URL}/activity/${id}`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+    deleteRestoreTask: builder.mutation({
+      query: ({ id, actionType }) => ({
+        url: `${TASKS_URL}/delete-restore/${id}?actionType=${actionType}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
@@ -60,4 +103,11 @@ export const {
   useGetAllTaskQuery,
   useCreateTaskMutation,
   useDuplicateTaskMutation,
-} = taskApi;
+  useUpdateTaskMutation,
+  useTrashTastMutation,
+  useCreateSubTaskMutation,
+  useGetSingleTaskQuery,
+  usePostTaskActivityMutation,
+  useDeleteRestoreTaskMutation,
+} = taskApiSlice;
+
