@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    
     "@headlessui/react": "^1.7.18",
     "@internationalized/date": "^3.5.2",
     "@reduxjs/toolkit": "^2.1.0",
