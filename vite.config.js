@@ -10,7 +10,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       "/api": {
-        target: "https://backendpfe-v9la.onrender.com",
+        target: "https://gestiondesprojectsserver.onrender.com/",
         changeOrigin: true,
       },
     },
