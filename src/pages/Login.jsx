@@ -27,7 +27,7 @@ const Login = () => {
     const result = await login(data).unwrap();
     
     dispatch(setCredentials (result));
-    navigate("/");
+    navigate("/dashboard");
     } catch (error) {
     console.log(error);
     toast.error(error?.data?.message || error.message);
