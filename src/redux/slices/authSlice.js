@@ -5,7 +5,7 @@ const initialState = {
   user: localStorage.getItem("userInfo")
     ? JSON.parse(localStorage.getItem("userInfo"))
     : null,
-  token: localStorage.getItem("token")
+  token: localStorage.getItem("token"),
     //Cookies.get("token") || null, // Read token from cookie
   isSidebarOpen: false,
 };
