@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import Cookies from "js-cookie";
+import { user } from "../../assets/data";
 
 const initialState = {
   user: localStorage.getItem("userInfo")
     ? JSON.parse(localStorage.getItem("userInfo"))
     : null,
+
   isSidebarOpen: false,
 };
 
@@ -15,12 +16,10 @@ const authSlice = createSlice({
     setCredentials: (state, action) => {
       state.user = action.payload;
       localStorage.setItem("userInfo", JSON.stringify(action.payload));
-      Cookies.set("token", action.payload.token, { expires: 7 }); // Assuming the token is stored in action.payload.token
     },
     logout: (state, action) => {
       state.user = null;
       localStorage.removeItem("userInfo");
-      Cookies.remove("token");
     },
     setOpenSidebar: (state, action) => {
       state.isSidebarOpen = action.payload;
