@@ -102,13 +102,13 @@ function App() {
         <Route element={<Layout />}>
           <Route index path='GestionDesProjectsPFE/' element={<Navigate to='/dashboard' />} />
           <Route path='/dashboard' element={<Dashboard />} />
-          <Route path='GestionDesProjectsPFE/tasks' element={<Tasks />} />
-          <Route path='GestionDesProjectsPFE/completed/:status' element={<Tasks />} />
-          <Route path='GestionDesProjectsPFE/in-progress/:status' element={<Tasks />} />
-          <Route path='GestionDesProjectsPFE/todo/:status' element={<Tasks />} />
-          <Route path='GestionDesProjectsPFE/team' element={<Users />} />
-          <Route path='GestionDesProjectsPFE/trashed' element={<Trash />} />
-          <Route path='GestionDesProjectsPFE/task/:id' element={<TaskDetails />} />
+          <Route path='/tasks' element={<Tasks />} />
+          <Route path='/completed/:status' element={<Tasks />} />
+          <Route path='/in-progress/:status' element={<Tasks />} />
+          <Route path='/todo/:status' element={<Tasks />} />
+          <Route path='/team' element={<Users />} />
+          <Route path='/trashed' element={<Trash />} />
+          <Route path='/task/:id' element={<TaskDetails />} />
         </Route>
 
         <Route path='GestionDesProjectsPFE/log-in' element={<Login />} />
